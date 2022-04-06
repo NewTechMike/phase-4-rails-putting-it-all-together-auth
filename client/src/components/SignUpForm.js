@@ -15,6 +15,7 @@ function SignUpForm({ onLogin }) {
     setErrors([]);
     setIsLoading(true);
     fetch("/signup", {
+
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -31,7 +32,10 @@ function SignUpForm({ onLogin }) {
       if (r.ok) {
         r.json().then((user) => onLogin(user));
       } else {
-        r.json().then((err) => setErrors(err.errors));
+        r.json().then((err) => {
+          console.log(err) 
+          setErrors(err.errors);
+        })
       }
     });
   }
